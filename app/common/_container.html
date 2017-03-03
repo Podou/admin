@@ -1,0 +1,26 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      {{ indexCtrl.breadcrumb.title }}
+      <small>{{ indexCtrl.breadcrumb.subTitle }}</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a ui-sref="main.dashboard.v1"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li
+        ng-repeat="item in indexCtrl.breadcrumb.list track by $index"
+        ng-class="{ active:  indexCtrl.breadcrumb.list.length === $index + 1 }"
+      >
+        <a 
+          ng-click="indexCtrl.linkto(item.link)" 
+          ng-if="indexCtrl.breadcrumb.list.length > $index + 1" 
+          style="cursor: pointer;"
+        >
+          {{ item.name }}
+        </a>
+        <span ng-if="indexCtrl.breadcrumb.list.length === $index + 1">{{ item.name }}</span>
+      </li>
+    </ol>
+  </section>
+  <ui-view name="main.container"></ui-view>
+</div>
