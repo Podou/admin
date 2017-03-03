@@ -4,7 +4,6 @@ define(['app'], function (app) {
     var self = this;
     self.data = {};
     self.login = function() {
-      console.log(self.data);
       if (self.data.username === 'admin' && self.data.password === 'admin123') {
         $cookieStore.put('access_token', 'AKLJFLAJFOIASJDJASPOJAFJASFASF');
         $cookieStore.put('username', self.data.username);
