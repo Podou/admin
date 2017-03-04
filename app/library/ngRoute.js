@@ -50,7 +50,8 @@ define('ngRoute', ['app'], function (app) {
 
   var dashboardRouter = [
     getRouter([ 'dashboard', 'v1' ], 'v1', 'v1'),
-    getRouter([ 'dashboard', 'v2' ], 'v2', 'v2')
+    getRouter([ 'dashboard', 'v2' ], 'v2', 'v2'),
+    getRouter([ 'dashboard', 'me' ], 'me', 'Mine')
   ];
 
   var widgetRouter = [
@@ -170,27 +171,27 @@ define('ngRoute', ['app'], function (app) {
       url:'/',
       views: {
         header: {
-          templateUrl: 'app/common/_header.html'
+          templateUrl: startUrl + 'common/_header.html'
         },
         aside: {
-          templateUrl: 'app/common/_aside.html'
+          templateUrl: startUrl + 'common/_aside.html'
         },
         asideNext: {
-          templateUrl: 'app/common/_aside_next.html'
+          templateUrl: startUrl + 'common/_aside_next.html'
         },
         main: {
-          templateUrl: 'app/common/_container.html'
+          templateUrl: startUrl + 'common/_container.html'
         },
         footer: {
-          templateUrl: 'app/common/_footer.html'
+          templateUrl: startUrl + 'common/_footer.html'
         }
       }
     });
 
     $urlRouterProvider
-      .when('/main.dashboard.v1', '/dashboard/v1')
-      .when('/main', '/dashboard/v1')
-      .otherwise('main.dashboard.v1');
+      .when('/main.dashboard.me', '/dashboard/me')
+      .when('/main', '/dashboard/me')
+      .otherwise('main.dashboard.me');
   }]);
 
   app.config(['generateProvider', function(generateProvider) {
