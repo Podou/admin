@@ -7,17 +7,27 @@ define('ngRoute', ['app'], function (app) {
   function getRouter(routes, name, title) {
     // .replace(/(\w)/,function(v){return v.toUpperCase()});
     routes = routes || [];
-    var uiSref = 'main.' + _.join(routes, '.');
+    var uiSref = 'main.' + routes.join('.');
     if (name === 'index') {
       uiSref += '.index';
     }
+
+    function getName(names) {
+      var name = '';
+      angular.forEach(names, function(value) {
+        name += value.replace(/(\w)/,function(v){return v.toUpperCase()});
+      });
+      console.log(name);
+      return name;
+    }
+
     return {
       title: title,
       name: name,
       uiSref: uiSref,
-      templateUrl: startUrl + 'container/' + _.join(routes, '/') + '/index.html',
-      controller: _.upperFirst(_.camelCase(routes)) + 'Controller',
-      controllerUrl: startUrl + 'container/'+ _.join(routes, '/') + '/controller.js'
+      templateUrl: startUrl + 'container/' + routes.join('/') + '/index.html',
+      controller: getName(routes) + 'Controller',
+      controllerUrl: startUrl + 'container/'+ routes.join('/') + '/controller.js'
     };
   }
 
