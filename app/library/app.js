@@ -37,56 +37,6 @@ define('app', [
       list: []
     };
   })
-  .provider('generate', [ '$stateProvider',
-    function($stateProvider) {
-      this.state = function(state) {
-        $stateProvider.state('main.' + state.url, {
-          url: state.url,
-          views: {
-            'main.container':{
-              templateUrl: state.templateUrl,
-              controller: ['$rootScope', function($rootScope) {
-                $rootScope.$broadcast('onHeaderTitle', {title: state.title});
-              }]
-            }
-          }
-        });
-      };
-      this.router = function(route) {
-        $stateProvider
-        .state(route.uiSref, {
-          url: '/' + route.name +'?'+ route.params,
-          views: {
-            '': {
-              templateUrl: route.templateUrl,
-              controller: route.controller,
-              controllerAs: 'ctrl'
-            }
-          },
-          resolve: {
-            // deps: $requireProvider.requireJS([route.controllerUrl])
-            deps: ['$ocLazyLoad', function($ocLazyLoad) {
-              return route.depsModule
-              ? $ocLazyLoad.load(route.depsModule).then(function() {
-                return $ocLazyLoad.load(route.controllerUrl);
-              })
-              : $ocLazyLoad.load(route.controllerUrl);
-            }]
-          },
-          params: { data: {} }
-        });
-      };
-      this.$get = function() {};
-    }
-  ])
-  .run(['$rootScope', '$location', function () {
-    // $rootScope.$on('$stateChangeStart',
-    //   function (event, toState, toParams, fromState, fromParams){
-    //     // console.log('StateChange', event, toState, toParams, fromState, fromParams);
-    //     console.log(toState);
-    //   }
-    // );
-  }])
   .config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
     $ocLazyLoadProvider.config({
       debug: true,

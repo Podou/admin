@@ -7,7 +7,7 @@ define(['app'], function (app) {
       if (self.data.username === 'admin' && self.data.password === 'admin123') {
         $cookieStore.put('access_token', 'AKLJFLAJFOIASJDJASPOJAFJASFASF');
         $cookieStore.put('username', self.data.username);
-        $state.go('main.dashboard.v1');
+        $state.go('main.dashboard.me');
       } else {
         self.showError = true;
       }

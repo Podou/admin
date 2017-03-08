@@ -93,6 +93,7 @@
           </li>
         </ul>
       </box>
+
       <!-- Custom tabs (Charts with tabs)-->
       <div class="nav-tabs-custom">
         <!-- Tabs within a box -->
@@ -344,7 +345,20 @@
     <!-- /.Left col -->
     <!-- right col (We are only adding the ID to make the widgets sortable)-->
     <section class="col-lg-5 connectedSortable">
-
+      <box icon="fa fa-th" title="Matlab Tutorial">
+        <ul class="todo-list">
+          <li ng-repeat="item in ctrl.matlabToturial">
+            <span class="handle">
+              <i class="fa fa-ellipsis-v"></i>
+              <i class="fa fa-ellipsis-v"></i>
+            </span>
+            <span class="text">{{ item.name }}</span>
+            <a target="_blank" href="{{ item.link }}">
+              <i class="fa fa-youtube-play" style="color: #f56954;"></i>
+            </a>
+          </li>
+        </ul>
+      </box>
       <!-- Map box -->
       <div class="box box-solid bg-light-blue-gradient">
         <div class="box-header">

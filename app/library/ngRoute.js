@@ -4,33 +4,6 @@ define('ngRoute', ['app'], function (app) {
   var dashboardTemplatePath = startUrl + 'container/dashboard/'
   var dashboardUiSref = 'main.dashboard.';
 
-  // var dashboardRouter = [
-  //   {
-  //     title: 'Dashboard v1',
-  //     name: 'v1',
-  //     uiSref: 'main.dashboard.v1',
-  //     templateUrl: startUrl + 'container/dashboard/v1/index.html',
-  //     controller: 'DashboardV1Controller',
-  //     controllerUrl: startUrl + 'container/dashboard/v1/controller.js'
-  //   }, {
-  //     title: 'Dashboard v2',
-  //     name: 'v2',
-  //     uiSref: 'main.dashboard.v2',
-  //     templateUrl: startUrl + 'container/dashboard/v2/index.html',
-  //     controller: 'DashboardV2Controller',
-  //     controllerUrl: startUrl + 'container/dashboard/v2/controller.js'
-  //   }
-  // ];
-  // var widgetRouter = [
-  //   {
-  //     title: 'Widget',
-  //     name: 'index',
-  //     uiSref: 'main.widget.index',
-  //     templateUrl: startUrl + 'container/widget/index.html',
-  //     controller: 'WidgetController',
-  //     controllerUrl: startUrl + 'container/widget/controller.js'
-  //   }
-  // ];
   function getRouter(routes, name, title) {
     // .replace(/(\w)/,function(v){return v.toUpperCase()});
     routes = routes || [];
@@ -163,6 +136,49 @@ define('ngRoute', ['app'], function (app) {
     templateUrl: templatePath
   }];
 
+  // Create provider for router.
+  app.provider('generate', [ '$stateProvider',
+    function($stateProvider) {
+      this.state = function(state) {
+        $stateProvider.state('main.' + state.url, {
+          url: state.url,
+          views: {
+            'main.container':{
+              templateUrl: state.templateUrl,
+              controller: ['$rootScope', function($rootScope) {
+                $rootScope.$broadcast('onHeaderTitle', {title: state.title});
+              }]
+            }
+          }
+        });
+      };
+      this.router = function(route) {
+        $stateProvider
+        .state(route.uiSref, {
+          url: '/' + route.name +'?'+ route.params,
+          views: {
+            '': {
+              templateUrl: route.templateUrl,
+              controller: route.controller,
+              controllerAs: 'ctrl'
+            }
+          },
+          resolve: {
+            // deps: $requireProvider.requireJS([route.controllerUrl])
+            deps: ['$ocLazyLoad', function($ocLazyLoad) {
+              return route.depsModule
+              ? $ocLazyLoad.load(route.depsModule).then(function() {
+                return $ocLazyLoad.load(route.controllerUrl);
+              })
+              : $ocLazyLoad.load(route.controllerUrl);
+            }]
+          },
+          params: { data: {} }
+        });
+      };
+      this.$get = function() {};
+    }
+  ]);
   app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     $stateProvider
     // This is home state, will show _header.html, _footer.html
