@@ -34,7 +34,7 @@ var files = {
   angular: [
     'bower_components/angular/angular.min.js',
     'bower_components/angular-cookies/angular-cookies.min.js',
-    'bower_components/angular-translate/angular-translate.min.js',
+    // 'bower_components/angular-translate/angular-translate.min.js',
     'bower_components/angular-ui-router/release/angular-ui-router.min.js',
     'bower_components/oclazyload/dist/ocLazyLoad.require.min.js'
   ]

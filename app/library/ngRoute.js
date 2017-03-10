@@ -17,7 +17,6 @@ define('ngRoute', ['app'], function (app) {
       angular.forEach(names, function(value) {
         name += value.replace(/(\w)/,function(v){return v.toUpperCase()});
       });
-      console.log(name);
       return name;
     }
 

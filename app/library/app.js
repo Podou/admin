@@ -26,7 +26,7 @@ define('app', [
   var app = angular.module('ngApp',[
     'oc.lazyLoad',
     'ui.router',
-    'pascalprecht.translate',
+    // 'pascalprecht.translate',
     'ngCookies'
   ]);
 
