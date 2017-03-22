@@ -36,6 +36,10 @@ define('ngRoute', ['app'], function (app) {
     getRouter([ 'dashboard', 'me' ], 'me', 'Mine')
   ];
 
+  var forumRouter = [
+    getRouter([ 'forum' ], 'index', 'Forum'),
+  ];
+
   var widgetRouter = [
     getRouter([ 'widget' ], 'index', 'Widget'),
   ];
@@ -101,7 +105,8 @@ define('ngRoute', ['app'], function (app) {
     mailboxRouter,
     calendarRouter,
     exampleRouter,
-    chartsRouter
+    chartsRouter,
+    forumRouter
   ];
   var states = [{
     url: 'dashboard',
@@ -110,6 +115,10 @@ define('ngRoute', ['app'], function (app) {
   }, {
     url: 'widget',
     title: 'Widget',
+    templateUrl: templatePath
+  }, {
+    url: 'forum',
+    title: 'Forum',
     templateUrl: templatePath
   }, {
     url: 'calendar',

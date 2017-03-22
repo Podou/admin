@@ -60,7 +60,13 @@
         </ul>
       </li>
       -->
-      <li>
+      <li ng-class="{active: indexCtrl.parent==='forum'}">
+        <!-- <a href="pages/widgets.html"> -->
+        <a ui-sref="main.forum.index">
+          <i class="fa fa-th"></i> <span>Forum</span>
+        </a>
+      </li>
+      <li ng-class="{active: indexCtrl.parent==='widget'}">
         <!-- <a href="pages/widgets.html"> -->
         <a ui-sref="main.widget.index">
           <i class="fa fa-th"></i> <span>Widgets</span>

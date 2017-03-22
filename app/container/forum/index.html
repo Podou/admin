@@ -1,0 +1,14 @@
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+          <div ng-repeat="item in ctrl.forums">
+          <a href="{{ item.link }}" target="_black">
+            <img ng-src="{{ item.logo }}" alt="{{ item.name }}" title="{{ item.name }}" />
+          </a>
+        </div>
+    </div>
+  </div>
+  <!-- /.row -->
+</section>
+<!-- /.content -->
