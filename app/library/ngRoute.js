@@ -44,6 +44,10 @@ define('ngRoute', ['app'], function (app) {
     getRouter([ 'widget' ], 'index', 'Widget'),
   ];
 
+  var versionRouter = [
+    getRouter([ 'version' ], 'index', 'Version')
+  ];
+
   var chartsRouter = [
     getRouter([ 'charts', 'chartjs' ], 'chartjs', 'Chart.js'),
     getRouter([ 'charts', 'flot' ], 'flot', 'Flot.js'),
@@ -58,6 +62,10 @@ define('ngRoute', ['app'], function (app) {
     getRouter([ 'ui', 'modals' ], 'modals', 'Modals'),
     getRouter([ 'ui', 'sliders' ], 'sliders', 'Sliders'),
     getRouter([ 'ui', 'timeline' ], 'timeline', 'Timeline')
+  ];
+
+  var projectRouter = [
+    getRouter([ 'project', 'game' ], 'game', 'Game')
   ];
 
   var formRouter = [
@@ -106,15 +114,25 @@ define('ngRoute', ['app'], function (app) {
     calendarRouter,
     exampleRouter,
     chartsRouter,
-    forumRouter
+    forumRouter,
+    versionRouter,
+    projectRouter
   ];
   var states = [{
     url: 'dashboard',
     title: 'Dashboard',
     templateUrl: templatePath
   }, {
+    url: 'project',
+    title: 'Project',
+    templateUrl: templatePath
+  }, {
     url: 'widget',
     title: 'Widget',
+    templateUrl: templatePath
+  }, {
+    url: 'version',
+    title: 'Version',
     templateUrl: templatePath
   }, {
     url: 'forum',
