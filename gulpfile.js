@@ -29,7 +29,8 @@ var files = {
     'app/library/bootstrap.js',
     'app/library/app.js',
     'app/library/ngRoute.js',
-    'app/library/main.js'
+    'app/library/main.js',
+    'app/library/routes.js'
   ],
   angular: [
     'bower_components/angular/angular.min.js',

@@ -1,123 +1,9 @@
-define('ngRoute', ['app'], function (app) {
+define('ngRoute', ['app', 'routes'], function (app, routes) {
   var startUrl = 'app/';
   var templatePath = startUrl + 'container/ngTemplate.html';
   var dashboardTemplatePath = startUrl + 'container/dashboard/'
   var dashboardUiSref = 'main.dashboard.';
 
-  function getRouter(routes, name, title) {
-    // .replace(/(\w)/,function(v){return v.toUpperCase()});
-    routes = routes || [];
-    var uiSref = 'main.' + routes.join('.');
-    if (name === 'index') {
-      uiSref += '.index';
-    }
-
-    function getName(names) {
-      var name = '';
-      angular.forEach(names, function(value) {
-        name += value.replace(/(\w)/,function(v){return v.toUpperCase()});
-      });
-      return name;
-    }
-
-    return {
-      title: title,
-      name: name,
-      uiSref: uiSref,
-      templateUrl: startUrl + 'container/' + routes.join('/') + '/index.html',
-      controller: getName(routes) + 'Controller',
-      controllerUrl: startUrl + 'container/'+ routes.join('/') + '/controller.js'
-    };
-  }
-
-  var dashboardRouter = [
-    getRouter([ 'dashboard', 'v1' ], 'v1', 'v1'),
-    getRouter([ 'dashboard', 'v2' ], 'v2', 'v2'),
-    getRouter([ 'dashboard', 'me' ], 'me', 'Mine')
-  ];
-
-  var forumRouter = [
-    getRouter([ 'forum' ], 'index', 'Forum'),
-  ];
-
-  var widgetRouter = [
-    getRouter([ 'widget' ], 'index', 'Widget'),
-  ];
-
-  var versionRouter = [
-    getRouter([ 'version' ], 'index', 'Version')
-  ];
-
-  var chartsRouter = [
-    getRouter([ 'charts', 'chartjs' ], 'chartjs', 'Chart.js'),
-    getRouter([ 'charts', 'flot' ], 'flot', 'Flot.js'),
-    getRouter([ 'charts', 'inline' ], 'inline', 'Inline'),
-    getRouter([ 'charts', 'morris' ], 'morris', 'Morris')
-  ];
-
-  var uiRouter = [
-    getRouter([ 'ui', 'buttons' ], 'buttons', 'Buttons'),
-    getRouter([ 'ui', 'general' ], 'general', 'General'),
-    getRouter([ 'ui', 'icons' ], 'icons', 'Icons'),
-    getRouter([ 'ui', 'modals' ], 'modals', 'Modals'),
-    getRouter([ 'ui', 'sliders' ], 'sliders', 'Sliders'),
-    getRouter([ 'ui', 'timeline' ], 'timeline', 'Timeline')
-  ];
-
-  var projectRouter = [
-    getRouter([ 'project', 'game' ], 'game', 'Game')
-  ];
-
-  var formRouter = [
-    getRouter([ 'forms', 'advanced' ], 'advanced', 'Advanced'),
-    getRouter([ 'forms', 'editors' ], 'editors', 'Editors'),
-    getRouter([ 'forms', 'general' ], 'general', 'General')
-  ];
-
-  var tableRouter = [
-    getRouter([ 'table', 'data' ], 'data', 'Data'),
-    getRouter([ 'table', 'simple' ], 'simple', 'Simple')
-  ];
-
-  var mailboxRouter = [
-    getRouter([ 'mailbox', 'compose' ], 'compose', 'Compose'),
-    getRouter([ 'mailbox', 'inbox' ], 'inbox', 'Inbox'),
-    getRouter([ 'mailbox', 'read' ], 'read', 'Read')
-  ];
-
-  var calendarRouter = [
-    getRouter([ 'calendar' ], 'index', 'Calendar'),
-  ];
-
-  var exampleRouter = [
-    getRouter([ 'example', '404' ], '404', '404'),
-    getRouter([ 'example', '500' ], '500', '500'),
-    getRouter([ 'example', 'blank' ], 'blank', 'Blank'),
-    getRouter([ 'example', 'invoice' ], 'invoice', 'Invoice'),
-    getRouter([ 'example', 'profile' ], 'profile', 'Profile'),
-    getRouter([ 'example', 'pace' ], 'pace', 'Pace')
-  ];
-
-  var authRouter = [
-    getRouter([ 'auth', 'login' ], 'login', 'Login'),
-    getRouter([ 'auth', 'register' ], 'register', 'Register')
-  ];
-
-  var routes = [
-    authRouter,
-    dashboardRouter,
-    widgetRouter,
-    uiRouter,
-    formRouter,
-    tableRouter,
-    mailboxRouter,
-    calendarRouter,
-    exampleRouter,
-    chartsRouter,
-    forumRouter,
-    versionRouter,
-    projectRouter
-  ];
   var states = [{
     url: 'dashboard',
     title: 'Dashboard',
@@ -175,6 +61,7 @@ define('ngRoute', ['app'], function (app) {
   // Create provider for router.
   app.provider('generate', [ '$stateProvider',
     function($stateProvider) {
+
       this.state = function(state) {
         $stateProvider.state('main.' + state.url, {
           url: state.url,
@@ -247,13 +134,12 @@ define('ngRoute', ['app'], function (app) {
   }]);
 
   app.config(['generateProvider', function(generateProvider) {
+    console.log(routes);
     angular.forEach(states, function(state) {
       generateProvider.state(state);
     });
-    angular.forEach(routes, function(subRoutes) {
-      angular.forEach(subRoutes, function(route) {
-        generateProvider.router(route);
-      });
+    angular.forEach(routes, function(route) {
+      generateProvider.router(route);
     });
   }]);
 });

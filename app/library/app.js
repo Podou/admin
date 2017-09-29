@@ -73,8 +73,8 @@ define('app', [
     };
   })
   .controller('IndexController', [
-    '$scope', '$rootScope', '$state', '$cookieStore', 'config', 'breadcrumb', 
-    function ($scope, $rootScope, $state, $cookieStore, config, breadcrumb) 
+    '$scope', '$rootScope', '$state', '$cookieStore', 'config', 'breadcrumb',
+    function ($scope, $rootScope, $state, $cookieStore, config, breadcrumb)
   {
     var self = this;
     self.hasLogin = config.hasLogin;
@@ -86,7 +86,7 @@ define('app', [
     };
 
     self.logout = function() {
-      $cookieStore.remove('access_token');      
+      $cookieStore.remove('access_token');
       self.toLogin();
     };
 
